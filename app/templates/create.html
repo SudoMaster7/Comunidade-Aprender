@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-lg border-0">
+            <div class="card-body p-5">
+                <h2 class="card-title text-center mb-4 fw-bold text-white">Novo Recurso</h2>
+                <p class="text-center text-secondary mb-4">Compartilhe conhecimento com a comunidade.</p>
+
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+
+                    <div class="mb-3">
+                        {{ form.title.label(class="form-label text-light") }}
+                        {% if form.title.errors %}
+                        {{ form.title(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.title.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.title(class="form-control") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.url.label(class="form-label text-light") }}
+                        {% if form.url.errors %}
+                        {{ form.url(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.url.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.url(class="form-control") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.type.label(class="form-label text-light") }}
+                        {% if form.type.errors %}
+                        {{ form.type(class="form-select is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.type.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.type(class="form-select") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.description.label(class="form-label text-light") }}
+                        {% if form.description.errors %}
+                        {{ form.description(class="form-control is-invalid", rows="4") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.description.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.description(class="form-control", rows="4") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-4">
+                        {{ form.tags.label(class="form-label text-light") }}
+                        {% if form.tags.errors %}
+                        {{ form.tags(class="form-control is-invalid", placeholder="Ex: python, flask, web") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.tags.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.tags(class="form-control", placeholder="Ex: python, flask, web") }}
+                        {% endif %}
+                        <div class="form-text text-secondary">Separe as tags por vírgula.</div>
+                    </div>
+
+                    <div class="d-grid">
+                        {{ form.submit(class="btn btn-primary btn-lg") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

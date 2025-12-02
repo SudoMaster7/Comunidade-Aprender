@@ -1,0 +1,202 @@
+:root {
+    /* Default Dark Theme */
+    --bg-body: #0f172a;
+    --bg-card: #1e293b;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --input-bg: #ffffff;
+    --input-border: #475569;
+    --input-text: #1e293b;
+    --accent-primary: #8b5cf6;
+    --accent-secondary: #06b6d4;
+    --accent-hover: #7c3aed;
+    --navbar-bg: rgba(15, 23, 42, 0.95);
+}
+
+[data-theme="light"] {
+    --bg-body: #f8f9fa;
+    --bg-card: #ffffff;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --border-color: rgba(0, 0, 0, 0.1);
+    --input-bg: #ffffff;
+    --input-border: #cbd5e1;
+    --input-text: #1e293b;
+    --accent-primary: #6200ea;
+    --accent-secondary: #0284c7;
+    --accent-hover: #4c1d95;
+    --navbar-bg: rgba(255, 255, 255, 0.95);
+}
+
+body {
+    background-color: var(--bg-body);
+    color: var(--text-primary);
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar {
+    background-color: var(--navbar-bg) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.3s ease;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: var(--accent-secondary) !important;
+    letter-spacing: 0.5px;
+}
+
+.navbar-nav .nav-link {
+    color: var(--text-secondary) !important;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+    color: var(--accent-primary) !important;
+}
+
+.card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-color: var(--accent-primary);
+}
+
+.card-title,
+.card-title a {
+    color: var(--text-primary) !important;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.card-title a:hover {
+    color: var(--accent-secondary) !important;
+}
+
+.card-text {
+    color: var(--text-secondary);
+}
+
+.text-primary {
+    color: var(--accent-primary) !important;
+}
+
+.text-white {
+    color: var(--text-primary) !important;
+}
+
+.text-light {
+    color: var(--text-primary) !important;
+}
+
+.text-secondary {
+    color: var(--text-secondary) !important;
+}
+
+.text-muted {
+    color: var(--text-secondary) !important;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-hover));
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+    border-radius: 8px;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--accent-hover), var(--accent-primary));
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+    color: #fff;
+}
+
+.btn-outline-primary {
+    color: var(--accent-secondary);
+    border-color: var(--accent-secondary);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--accent-secondary);
+    color: #fff;
+}
+
+.badge-tag {
+    background-color: rgba(255, 233, 233, 0.15);
+    color: var(--accent-secondary);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    padding: 0.35em 0.65em;
+    border-radius: 6px;
+}
+
+.form-control,
+.form-select {
+    background-color: var(--input-bg);
+    border: 1px solid var(--input-border);
+    color: var(--input-text);
+}
+
+.form-control:focus,
+.form-select:focus {
+    background-color: var(--input-bg);
+    border-color: var(--accent-primary);
+    color: var(--input-text);
+    box-shadow: 0 0 0 0.25rem rgba(139, 92, 246, 0.25);
+}
+
+.form-label {
+    color: var(--text-primary);
+}
+
+.form-check-input {
+    background-color: var(--input-bg);
+    border-color: var(--input-border);
+}
+
+.form-check-input:checked {
+    background-color: var(--accent-primary);
+    border-color: var(--accent-primary);
+}
+
+.form-check-label {
+    color: var(--text-primary);
+}
+
+/* Auth Pages Fixes */
+.auth-card {
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+/* Modal Fixes */
+.modal-content {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.modal-header,
+.modal-footer {
+    border-color: var(--border-color);
+}
+
+.btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+[data-theme="light"] .btn-close {
+    filter: none;
+}

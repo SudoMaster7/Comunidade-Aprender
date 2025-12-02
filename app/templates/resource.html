@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow-lg mb-4">
+            <div class="card-body p-5">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <span class="badge bg-cinza border border-secondary text-light">{{ resource.type }}</span>
+                    <small class="text-secondary">{{ resource.created_at.strftime('%d/%m/%Y') }}</small>
+                </div>
+                <h1 class="card-title fw-bold text-white mb-3">{{ resource.title }}</h1>
+                <div class="mb-4">
+                    {% for tag in resource.tags %}
+                    <span class="badge badge-tag">{{ tag.name }}</span>
+                    {% endfor %}
+                </div>
+                <p class="card-text text-light lead mb-4">{{ resource.description }}</p>
+
+                <div class="d-flex justify-content-between align-items-center pt-4 border-top border-secondary">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-secondary rounded-circle me-2" style="width: 32px; height: 32px;"></div>
+                        <span class="text-light fw-bold">{{ resource.author.username }}</span>
+                    </div>
+                    <div>
+                        <a href="{{ url_for('main.like_resource', resource_id=resource.id) }}"
+                            class="btn btn-outline-danger me-2">
+                            <i class="bi bi-heart-fill"></i> Curtir ({{ resource.likes }})
+                        </a>
+                        <a href="{{ resource.url }}" target="_blank" class="btn btn-primary">Acessar Link</a>
+                    </div>
+                </div>
+
+                {% if resource.author == current_user %}
+                <div class="mt-3 text-end">
+                    <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal"
+                        data-bs-target="#deleteModal">
+                        Excluir Recurso
+                    </button>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Comments Section -->
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <h3 class="text-white mb-4">Comentários</h3>
+                {% for comment in resource.comments %}
+                <div class="mb-3 pb-3 border-bottom border-secondary">
+                    <div class="d-flex justify-content-between">
+                        <strong class="text-light">{{ comment.author.username }}</strong>
+                        <small class="text-secondary">{{ comment.date_posted.strftime('%d/%m/%Y %H:%M') }}</small>
+                    </div>
+                    <p class="text-secondary mt-1">{{ comment.content }}</p>
+                </div>
+                {% endfor %}
+
+                {% if current_user.is_authenticated %}
+                <form method="POST" action="" class="mt-4">
+                    <div class="mb-3">
+                        <textarea name="content" class="form-control" rows="3" placeholder="Deixe seu comentário..."
+                            required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Comentar</button>
+                </form>
+                {% else %}
+                <div class="alert alert-info mt-3">
+                    <a href="{{ url_for('auth.login') }}">Faça login</a> para comentar.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content bg-dark border border-secondary">
+            <div class="modal-header border-secondary">
+                <h5 class="modal-title text-white">Confirmar Exclusão</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-secondary">
+                Tem certeza que deseja excluir este recurso? Essa ação não pode ser desfeita.
+            </div>
+            <div class="modal-footer border-secondary">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <form action="{{ url_for('main.delete_resource', resource_id=resource.id) }}" method="POST">
+                    <input class="btn btn-danger" type="submit" value="Excluir">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
